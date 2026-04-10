@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_cotton',
+    'blog',
 ]
 
 if DEBUG:
