@@ -12,7 +12,9 @@
 <body data-theme="light">
     <c-layouts.nav />
 
-    {{ slot }}
+    <main class="min-h-[calc(100dvh-250px)]">
+        {{ slot }}
+    </main>
 
     <c-layouts.footer />
 </body>

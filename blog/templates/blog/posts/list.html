@@ -1,0 +1,17 @@
+<c-layouts.base>
+    <header class="bg-info text-info-content py-15 text-center">
+        <h1 class="text-2xl font-bold">
+            お知らせ一覧
+        </h1>
+    </header>
+
+    <div class="max-w-6xl mx-4 lg:mx-auto my-6">
+        <div class="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for post in post_list %}
+                <c-blog.posts.card :post="post" />
+            {% empty %}
+                <p>お知らせはありません</p>
+            {% endfor %}
+        </div>
+    </div>
+</c-layouts.base>

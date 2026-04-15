@@ -1,0 +1,25 @@
+{% load static %}
+
+<article class="card bg-base-100 shadow-sm hover:bg-base-200">
+    <a href="#" class="p-4">
+        <img class="rounded-lg"
+            {% if post.thumbnail %}
+                src="{{ MEDIA_URL }}{{ post.thumbnail }}"
+            {% else %}
+                src="{% static 'logo.png' %}"
+            {% endif %}
+            alt="{{ post.title }}"
+        >
+    </a>
+    <div class="card-body">
+        <h2 class="card-title">
+            {{ post.title }}
+        </h2>
+        <div class="card-actions justify-between">
+            <a href="#" class="badge not-hover:badge-outline badge-info text-xs">{{ post.category.name }}</a>
+            <span class="block text-base-content/70 text-xs">
+                <time>{{ post.posted_at }}</time>
+            </span>
+        </div>
+    </div>
+</article>

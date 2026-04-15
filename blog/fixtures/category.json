@@ -1,0 +1,6 @@
+[
+    {"model": "blog.category", "pk": 1, "fields": {"name": "本校"}},
+    {"model": "blog.category", "pk": 2, "fields": {"name": "本町第２校"}},
+    {"model": "blog.category", "pk": 3, "fields": {"name": "B型"}},
+    {"model": "blog.category", "pk": 4, "fields": {"name": "四ツ橋校"}}
+]
