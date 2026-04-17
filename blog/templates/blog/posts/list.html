@@ -5,13 +5,17 @@
         </h1>
     </header>
 
-    <div class="max-w-6xl mx-4 lg:mx-auto my-6">
-        <div class="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="max-w-6xl lg:mx-auto p-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {% for post in post_list %}
                 <c-blog.posts.card :post="post" />
             {% empty %}
                 <p>お知らせはありません</p>
             {% endfor %}
+        </div>
+
+        <div class="mt-2">
+            <c-pagination />
         </div>
     </div>
 </c-layouts.base>

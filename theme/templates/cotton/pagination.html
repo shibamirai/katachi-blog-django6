@@ -1,0 +1,98 @@
+{% if page_obj.has_other_pages %}
+    <div>
+        <nav role="navigation" aria-label="ページネーション">
+            <div class="join flex justify-between sm:hidden">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}"
+                        class="join-item btn"
+                    >前へ</a>
+                {% else %}
+                    <span
+                        class="join-item btn"
+                    >前へ</span>
+                {% endif %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}"
+                        class="join-item btn"
+                    >次へ</a>
+                {% else %}
+                    <span
+                       class="join-item btn"
+                    >次へ</span>
+                {% endif %}
+            </div>
+
+            <div class="hidden sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm text-base-content">
+                    <span class="font-medium">{{ paginator.count }}</span>
+                    件中
+                    <span class="font-medium">{{ page_obj.start_index }}</span>
+                    ～
+                    <span class="font-medium">{{ page_obj.end_index }}</span>
+                    件を表示
+                    </p>
+                </div>
+
+                <div class="join">
+                    {# 前へ #}
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}"
+                            class="join-item btn px-2"
+                            rel="prev" aria-label="前へ"
+                        >
+                            <c-icons.arrow />
+                        </a>
+                    {% else %}
+                        <span aria-disabled="true" aria-label="前へ"
+                            class="join-item btn btn-disabled px-2"
+                        >
+                            <c-icons.arrow />
+                        </span>
+                    {% endif %}
+                    
+                    {# ページリンク #}
+                    {% for page in paginator.page_range %}
+                        {% if page is "..." %}
+                            {# "Three Dots" Separator #}
+                            <span aria-disabled="true">
+                                <span class="join-item btn btn-disabled">{{ page }}</span>
+                            </span>
+                        {% else %}
+                            {# Array Of Links #}
+                            {% if page == page_obj.number %}
+                                <span aria-current="page">
+                                    <span class="join-item btn btn-active">{{ page }}</span>
+                                </span>
+                            {% else %}
+                                <a href="?page={{ page }}"
+                                    class="join-item btn"
+                                    aria-label="ページ {{ page }}へ"
+                                >
+                                    {{ page }}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {# 次へ #}
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}"
+                            rel="next" aria-label="次へ"
+                            class="join-item btn px-2"
+                        >
+                            <c-icons.arrow class="transform -rotate-180" />
+                        </a>
+                    {% else %}
+                        <span aria-disabled="true" aria-label="次へ"
+                            class="join-item btn btn-disabled px-2"
+                        >
+                            <c-icons.arrow class="transform -rotate-180" />
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </div>
+{% endif %}
