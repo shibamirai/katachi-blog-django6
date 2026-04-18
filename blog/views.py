@@ -24,6 +24,12 @@ class PostListView(generic.ListView):
             queryset = queryset.filter(
                 category_id=category 
             )
+
+        author = self.request.GET.get('author')
+        if author is not None:
+            queryset = queryset.filter(
+                author_id=author 
+            )
         
         return queryset.select_related('category').order_by('-posted_at')
 

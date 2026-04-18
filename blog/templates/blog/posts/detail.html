@@ -36,7 +36,9 @@
             </h2>
 
             <p class="text-right font-bold mt-2">
-                {{ post.author.name }}
+                <a href="{% url 'home' %}{% querystring author=post.author.id %}">
+                    {{ post.author.name }}
+                </a>
             </p>
 
             <p class="leading-loose mt-8">
