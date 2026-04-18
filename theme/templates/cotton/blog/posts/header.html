@@ -3,25 +3,48 @@
         お知らせ一覧
     </h1>
 
-    <form class="mt-4" action="{% url 'home' %}">
-        <label class="input input-info">
-            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <g
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke-width="2.5"
-                    fill="none"
-                    stroke="currentColor"
-                >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3" />
-                </g>
-            </svg>
-            <input type="search"
-                class="grow"
-                name="search"
-                value="{{ request.GET.search }}"
-                placeholder="検索">
-        </label>
-    </form>
+    <div class="inline-flex items-center mt-4">
+        <div class="dropdown">
+            <div tabindex="0" role="button" class="btn m-1">
+                事業所選択
+                <c-icons.arrow class="transform -rotate-90" />
+            </div>
+            <ul tabindex="-1"
+                class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+                <li class="{% if request.GET.category is None %}bg-info text-info-content{% endif %}">
+                    <a href="{% url 'home' %}{% querystring category=None page=None %}">すべて</a>
+                </li>
+                {% for category in categories %}
+                    <li class="{% if request.GET.category == category.id|stringformat:'s' %}bg-info text-info-content{% endif %}">
+                        <a href="{% url 'home' %}{% querystring category=category.id page=None %}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <form action="{% url 'home' %}">
+            <label class="input input-info">
+                <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        stroke-width="2.5"
+                        fill="none"
+                        stroke="currentColor"
+                    >
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
+                    </g>
+                </svg>
+                <input type="search"
+                    class="grow"
+                    name="search"
+                    value="{{ request.GET.search }}"
+                    placeholder="検索">
+            </label>
+        </form>
+    </div>
 </header>
