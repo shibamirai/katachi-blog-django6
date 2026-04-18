@@ -32,3 +32,8 @@ class PostListView(generic.ListView):
         context['categories'] = Category.objects.all()
         context['current_category'] = Category.objects.filter(id=self.request.GET.get('category')).first()
         return context
+
+
+class PostView(generic.DetailView):
+    template_name = 'blog/posts/detail.html'
+    queryset = Post.objects.select_related('category').select_related('author')

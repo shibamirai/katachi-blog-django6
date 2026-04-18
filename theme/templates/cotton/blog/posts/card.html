@@ -1,7 +1,9 @@
 {% load static %}
 
 <article class="card bg-base-100 shadow-sm hover:bg-base-200">
-    <a href="#" class="p-4">
+    <a href="{% url 'detail' post.slug %}"
+        class="p-4"
+    >
         <img class="rounded-lg"
             {% if post.thumbnail %}
                 src="{{ MEDIA_URL }}{{ post.thumbnail }}"
@@ -16,7 +18,11 @@
             {{ post.title }}
         </h2>
         <div class="card-actions justify-between">
-            <a href="#" class="badge not-hover:badge-outline badge-info text-xs">{{ post.category.name }}</a>
+            <a href="{% url 'home' %}{% querystring category=post.category_id page=None %}"
+                class="badge not-hover:badge-outline badge-info text-xs"
+            >
+                {{ post.category.name }}
+            </a>
             <span class="block text-base-content/70 text-xs">
                 <time>{{ post.posted_at }}</time>
             </span>
