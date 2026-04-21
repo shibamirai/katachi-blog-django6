@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.contrib.auth.views import LoginView as BaseLoginView
 
-# Create your views here.
+from .forms import LoginForm
+
+class LoginView(BaseLoginView):
+    form_class = LoginForm
+    template_name = 'customauth/login.html'

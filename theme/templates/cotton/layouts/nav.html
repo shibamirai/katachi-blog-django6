@@ -9,17 +9,37 @@
         </a>
     </div>
     <div class="flex-none">
-        <ul class="menu menu-horizontal">
-            <li>
-                <a href="#">
-                    アカウント登録
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    ログイン
-                </a>
-            </li>
-        </div>
+        {% if user.is_authenticated %}
+            <ul class="menu menu-horizontal">
+                <li>
+                    <details>
+                        <summary>ようこそ {{ user.name }} さん</summary>
+                        <ul class="bg-base-100 rounded-box p-2">
+                            <li>
+                                <a href="#"
+                                    onclick="document.querySelector('#logout-form').submit()"
+                                >ログアウト</a>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+            <form id="logout-form" method="POST" action="{% url 'customauth:logout' %}" class="hidden">
+                {% csrf_token %}
+            </form>
+        {% else %}
+            <ul class="menu menu-horizontal">
+                <li>
+                    <a href="#">
+                        アカウント登録
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'customauth:login' %}">
+                        ログイン
+                    </a>
+                </li>
+            </ul>
+        {% endif %}
     </div>
 </nav>
