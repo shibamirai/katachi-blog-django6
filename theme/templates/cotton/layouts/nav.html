@@ -29,13 +29,15 @@
             </form>
         {% else %}
             <ul class="menu menu-horizontal">
+                {% url 'customauth:register' as register_url %}
+                {% url 'customauth:login' as login_url %}
                 <li>
-                    <a href="#">
+                    <a href="{{ register_url }}" class="{% if request.path == register_url %}bg-info{% endif %}">
                         アカウント登録
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'customauth:login' %}">
+                    <a href="{{ login_url }}" class="{% if request.path == login_url %}bg-info{% endif %}">
                         ログイン
                     </a>
                 </li>

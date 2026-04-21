@@ -1381,11 +1381,33 @@
       color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
     }
   }
+  .text-info {
+    color: var(--color-info);
+  }
   .text-info-content {
     color: var(--color-info-content);
   }
+  .text-info\/79 {
+    color: var(--color-info);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-info\/79 {
+      color: color-mix(in oklab, var(--color-info) 79%, transparent);
+    }
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
   .text-primary-content {
     color: var(--color-primary-content);
+  }
+  .text-primary\/80 {
+    color: var(--color-primary);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-primary\/80 {
+      color: color-mix(in oklab, var(--color-primary) 80%, transparent);
+    }
   }
   .opacity-50 {
     opacity: 50%;
