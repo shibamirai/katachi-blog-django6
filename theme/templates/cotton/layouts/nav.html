@@ -16,7 +16,13 @@
                         <summary>ようこそ {{ user.name }} さん</summary>
                         <ul class="bg-base-100 rounded-box p-2">
                             {% if user.is_admin %}
+                                {% url 'mylist' as mylist_url %}
                                 {% url 'create' as create_url %}
+                                <li>
+                                    <a href="{{ mylist_url }}"
+                                        class="{% if request.path == mylist_url %}bg-info{% endif %}"
+                                    >投稿記事一覧</a>
+                                </li>
                                 <li>
                                     <a href="{{ create_url }}"
                                         class="{% if request.path == create_url %}bg-info{% endif %}"

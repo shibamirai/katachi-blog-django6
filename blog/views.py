@@ -65,3 +65,20 @@ class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView
         form.instance.author = self.request.user
         form.instance.slug = datetime.now().strftime('%Y%m%d%H%M')
         return super().form_valid(form)
+
+class MyPostListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
+    template_name = 'blog/posts/mylist.html'
+    model = Post
+    paginate_by = 10
+
+    def test_func(self):
+        """管理者しかアクセスできないようにする"""
+        return self.request.user.is_admin
+
+    def get_queryset(self):
+        """ログインユーザが投稿したものだけ表示"""
+        queryset = super().get_queryset().filter(
+            author_id=self.request.user.id
+        )
+        return queryset.select_related('category').order_by('-posted_at')
+    

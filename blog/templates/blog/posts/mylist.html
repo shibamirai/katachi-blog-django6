@@ -1,0 +1,37 @@
+<c-layouts.base>
+    <section class="max-w-2xl mx-auto my-10 bg-base-100">
+        <h1 class="text-center font-bold text-xl">投稿記事一覧</h1>
+
+        {% if post_list.count == 0 %}
+            投稿された記事はありません
+        {% else %}
+            <ul class="list bg-base-100 rounded-box shadow-md">
+                {% for post in post_list %}
+                    <li class="list-row">
+                        <div>
+                            {{ post.posted_at|date:'Y/m/d' }}
+                        </div>
+                        <div>
+                            <a href="{% url 'detail' post.slug %}" class="block">
+                                {{ post.title }}
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#"
+                                class="hover:text-info"
+                            ><c-icons.edit /></a>
+                        </div>
+                        <div>
+                            <a href="#"
+                                class="hover:text-warning"
+                            ><c-icons.delete /></a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="mt-2">
+                <c-pagination />
+            </div>
+        {% endif %}
+    </section>
+</c-layouts.base>
