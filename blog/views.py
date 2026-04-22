@@ -96,3 +96,16 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
     
     def get_success_url(self):
         return reverse_lazy('detail', kwargs={'slug': self.object.slug})
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    """確認画面なしで記事を削除する
+    確認画面を挟む場合は template_name で設定し GET でアクセスする
+    """
+    model = Post
+    success_url = reverse_lazy('mylist')
+    
+    def test_func(self):
+        """投稿者本人しかアクセスできないようにする"""
+        post = self.get_object()
+        return post.author == self.request.user

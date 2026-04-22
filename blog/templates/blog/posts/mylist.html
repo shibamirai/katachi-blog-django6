@@ -22,9 +22,12 @@
                             ><c-icons.edit /></a>
                         </div>
                         <div>
-                            <a href="#"
-                                class="hover:text-warning"
-                            ><c-icons.delete /></a>
+                            <form action="{% url 'delete' post.slug %}" method="POST">
+                                {% csrf_token %}
+                                <button class="hover:text-warning"
+                                    onclick="return confirm('本当に削除しますか？')"
+                                ><c-icons.delete /></button>
+                            </form>
                         </div>
                     </li>
                 {% endfor %}
