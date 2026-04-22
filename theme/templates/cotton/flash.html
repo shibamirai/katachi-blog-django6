@@ -1,0 +1,13 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="toast"
+            x-data="{show: true}"
+            x-init="setTimeout(() => show = false, 4000)"
+            x-show="show"
+        >
+            <div class="alert alert-info">
+                <span>{{ message }}</span>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

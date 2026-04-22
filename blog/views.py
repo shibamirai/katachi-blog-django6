@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -49,10 +50,11 @@ class PostDetailView(generic.DetailView):
     queryset = Post.objects.select_related('category').select_related('author')
 
 
-class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
+class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.CreateView):
     form_class = PostForm
     template_name = 'blog/posts/create.html'
     success_url = reverse_lazy('home')
+    success_message = '「%(title)s」を投稿しました'
 
     def test_func(self):
         """管理者しかアクセスできないようにする"""
@@ -84,10 +86,11 @@ class MyPostListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
         return queryset.select_related('category').order_by('-posted_at')
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.UpdateView):
     form_class = PostForm
     template_name = 'blog/posts/edit.html'
     queryset = Post.objects.select_related('category').select_related('author')
+    success_message = '「%(title)s」を更新しました'
 
     def test_func(self):
         """投稿者本人しかアクセスできないようにする"""
@@ -98,14 +101,21 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
         return reverse_lazy('detail', kwargs={'slug': self.object.slug})
 
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.DeleteView):
     """確認画面なしで記事を削除する
     確認画面を挟む場合は template_name で設定し GET でアクセスする
     """
     model = Post
     success_url = reverse_lazy('mylist')
+    success_message = '「%(title)s」を削除しました'
     
     def test_func(self):
         """投稿者本人しかアクセスできないようにする"""
         post = self.get_object()
         return post.author == self.request.user
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            title=self.object.title,
+        )
