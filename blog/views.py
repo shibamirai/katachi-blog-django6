@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import PostCreateForm
+from .forms import PostForm
 from .models import Category, Post
 
 
@@ -50,7 +50,7 @@ class PostDetailView(generic.DetailView):
 
 
 class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
-    form_class = PostCreateForm
+    form_class = PostForm
     template_name = 'blog/posts/create.html'
     success_url = reverse_lazy('home')
 
@@ -65,6 +65,7 @@ class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView
         form.instance.author = self.request.user
         form.instance.slug = datetime.now().strftime('%Y%m%d%H%M')
         return super().form_valid(form)
+
 
 class MyPostListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     template_name = 'blog/posts/mylist.html'
@@ -81,4 +82,17 @@ class MyPostListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
             author_id=self.request.user.id
         )
         return queryset.select_related('category').order_by('-posted_at')
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    form_class = PostForm
+    template_name = 'blog/posts/edit.html'
+    queryset = Post.objects.select_related('category').select_related('author')
+
+    def test_func(self):
+        """投稿者本人しかアクセスできないようにする"""
+        post = self.get_object()
+        return post.author == self.request.user
     
+    def get_success_url(self):
+        return reverse_lazy('detail', kwargs={'slug': self.object.slug})
