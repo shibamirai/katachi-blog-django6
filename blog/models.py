@@ -12,11 +12,11 @@ class Category(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='カテゴリー')
     slug = models.CharField(max_length=20, unique=True)
-    title = models.CharField(max_length=100)
-    body = models.TextField()
-    thumbnail = models.ImageField(null=True, blank=True)
+    title = models.CharField(max_length=100, verbose_name='タイトル')
+    body = models.TextField(verbose_name='本文')
+    thumbnail = models.ImageField(null=True, blank=True, verbose_name='画像')
     posted_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 

@@ -1,7 +1,11 @@
+from datetime import datetime
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
+from .forms import PostCreateForm
 from .models import Category, Post
 
 
@@ -40,6 +44,24 @@ class PostListView(generic.ListView):
         return context
 
 
-class PostView(generic.DetailView):
+class PostDetailView(generic.DetailView):
     template_name = 'blog/posts/detail.html'
     queryset = Post.objects.select_related('category').select_related('author')
+
+
+class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
+    form_class = PostCreateForm
+    template_name = 'blog/posts/create.html'
+    success_url = reverse_lazy('home')
+
+    def test_func(self):
+        """管理者しかアクセスできないようにする"""
+        return self.request.user.is_admin
+    
+    def form_valid(self, form):
+        """モデルの保存前に、ログインユーザを投稿者とし
+        スラッグには投稿日時分を'202510271318'形式の文字列にしてセットする
+        """
+        form.instance.author = self.request.user
+        form.instance.slug = datetime.now().strftime('%Y%m%d%H%M')
+        return super().form_valid(form)

@@ -15,6 +15,14 @@
                     <details>
                         <summary>ようこそ {{ user.name }} さん</summary>
                         <ul class="bg-base-100 rounded-box p-2">
+                            {% if user.is_admin %}
+                                {% url 'create' as create_url %}
+                                <li>
+                                    <a href="{{ create_url }}"
+                                        class="{% if request.path == create_url %}bg-info{% endif %}"
+                                    >新規投稿</a>
+                                </li>
+                            {% endif %}
                             <li>
                                 <a href="#"
                                     onclick="document.querySelector('#logout-form').submit()"
@@ -32,14 +40,14 @@
                 {% url 'customauth:register' as register_url %}
                 {% url 'customauth:login' as login_url %}
                 <li>
-                    <a href="{{ register_url }}" class="{% if request.path == register_url %}bg-info{% endif %}">
-                        アカウント登録
-                    </a>
+                    <a href="{{ register_url }}"
+                        class="{% if request.path == register_url %}bg-info{% endif %}"
+                    >アカウント登録</a>
                 </li>
                 <li>
-                    <a href="{{ login_url }}" class="{% if request.path == login_url %}bg-info{% endif %}">
-                        ログイン
-                    </a>
+                    <a href="{{ login_url }}"
+                        class="{% if request.path == login_url %}bg-info{% endif %}"
+                    >ログイン</a>
                 </li>
             </ul>
         {% endif %}

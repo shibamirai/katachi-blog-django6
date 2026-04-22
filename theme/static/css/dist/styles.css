@@ -11,6 +11,7 @@
     --color-black: #000;
     --spacing: 0.25rem;
     --container-lg: 32rem;
+    --container-2xl: 42rem;
     --container-6xl: 72rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
@@ -838,6 +839,191 @@
       cursor: pointer;
     }
   }
+  @layer daisyui.l1.l2.l3 {
+    .select {
+      border: var(--border) solid #0000;
+      position: relative;
+      display: inline-flex;
+      flex-shrink: 1;
+      appearance: none;
+      align-items: center;
+      gap: calc(0.25rem * 1.5);
+      background-color: var(--color-base-100);
+      padding-inline-start: calc(0.25rem * 3);
+      padding-inline-end: calc(0.25rem * 7);
+      vertical-align: middle;
+      width: clamp(3rem, 20rem, 100%);
+      height: var(--size);
+      font-size: 0.875rem;
+      touch-action: manipulation;
+      border-start-start-radius: var(--join-ss, var(--radius-field));
+      border-start-end-radius: var(--join-se, var(--radius-field));
+      border-end-start-radius: var(--join-es, var(--radius-field));
+      border-end-end-radius: var(--join-ee, var(--radius-field));
+      background-image: linear-gradient(45deg, #0000 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, #0000 50%);
+      background-position: calc(100% - 20px) calc(1px + 50%), calc(100% - 16.1px) calc(1px + 50%);
+      background-size: 4px 4px, 4px 4px;
+      background-repeat: no-repeat;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 1px var(--input-color) inset, 0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;
+      border-color: var(--input-color);
+      --input-color: var(--color-base-content);
+      --size: calc(var(--size-field, 0.25rem) * 10);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .select {
+        box-shadow: 0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000) inset, 0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;
+      }
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .select {
+        --input-color: color-mix(in oklab, var(--color-base-content) 20%, #0000);
+      }
+    }
+    [dir="rtl"] .select {
+      background-position: calc(0% + 12px) calc(1px + 50%), calc(0% + 16px) calc(1px + 50%);
+    }
+    [dir="rtl"] .select::picker(select), [dir="rtl"] .select select::picker(select) {
+      translate: 0.5rem 0;
+    }
+    .select[multiple] {
+      height: auto;
+      overflow: auto;
+      padding-block: calc(0.25rem * 3);
+      padding-inline-end: calc(0.25rem * 3);
+      background-image: none;
+    }
+    .select select {
+      margin-inline-start: calc(0.25rem * -3);
+      margin-inline-end: calc(0.25rem * -7);
+      width: calc(100% + 2.75rem);
+      appearance: none;
+      padding-inline-start: calc(0.25rem * 3);
+      padding-inline-end: calc(0.25rem * 7);
+      height: calc(100% - calc(var(--border) * 2));
+      align-items: center;
+      background: inherit;
+      border-radius: inherit;
+      border-style: none;
+    }
+    .select select:focus, .select select:focus-within {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+    @media (forced-colors: active) {
+      .select select:focus, .select select:focus-within {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+    .select select:not(:last-child) {
+      margin-inline-end: calc(0.25rem * -5.5);
+      background-image: none;
+    }
+    .select:focus, .select:focus-within {
+      --input-color: var(--color-base-content);
+      box-shadow: 0 1px var(--input-color);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .select:focus, .select:focus-within {
+        box-shadow: 0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000);
+      }
+    }
+    .select:focus, .select:focus-within {
+      outline: 2px solid var(--input-color);
+      outline-offset: 2px;
+      isolation: isolate;
+    }
+    .select:has(> select[disabled]), .select:is(:disabled, [disabled]), fieldset:disabled .select {
+      cursor: not-allowed;
+      border-color: var(--color-base-200);
+      background-color: var(--color-base-200);
+      color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .select:has(> select[disabled]), .select:is(:disabled, [disabled]), fieldset:disabled .select {
+        color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+      }
+    }
+    .select:has(> select[disabled])::placeholder, .select:is(:disabled, [disabled])::placeholder, fieldset:disabled .select::placeholder {
+      color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .select:has(> select[disabled])::placeholder, .select:is(:disabled, [disabled])::placeholder, fieldset:disabled .select::placeholder {
+        color: color-mix(in oklab, var(--color-base-content) 20%, transparent);
+      }
+    }
+    .select:has(> select[disabled]) > select[disabled] {
+      cursor: not-allowed;
+    }
+    @supports (appearance: base-select) {
+      .select, .select select {
+        appearance: base-select;
+      }
+    }
+    @supports (appearance: base-select) {
+      .select::picker(select), .select select::picker(select) {
+        appearance: base-select;
+      }
+    }
+    .select::picker(select), .select select::picker(select) {
+      color: inherit;
+      max-height: min(24rem, 70dvh);
+      margin-inline: 0.5rem;
+      translate: -0.5rem 0;
+      border: var(--border) solid var(--color-base-200);
+      margin-block: calc(0.25rem * 2);
+      border-radius: var(--radius-box);
+      padding: calc(0.25rem * 2);
+      background-color: inherit;
+      box-shadow: 0 2px calc(var(--depth) * 3px) -2px oklch(0% 0 0/0.2);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / calc(var(--depth) * 0.1)), 0 8px 10px -6px rgb(0 0 0 / calc(var(--depth) * 0.1));
+    }
+    .select::picker-icon, .select select::picker-icon {
+      display: none;
+    }
+    .select optgroup, .select select optgroup {
+      padding-top: 0.5em;
+    }
+    .select optgroup option:nth-child(1), .select select optgroup option:nth-child(1) {
+      margin-top: 0.5em;
+    }
+    .select option, .select select option {
+      border-radius: var(--radius-field);
+      padding-inline: calc(0.25rem * 3);
+      padding-block: calc(0.25rem * 1.5);
+      transition-property: color, background-color;
+      transition-duration: 0.2s;
+      transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      white-space: normal;
+    }
+    .select option:not(:disabled):hover, .select option:not(:disabled):focus-visible, .select select option:not(:disabled):hover, .select select option:not(:disabled):focus-visible {
+      cursor: pointer;
+      background-color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .select option:not(:disabled):hover, .select option:not(:disabled):focus-visible, .select select option:not(:disabled):hover, .select select option:not(:disabled):focus-visible {
+        background-color: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+      }
+    }
+    .select option:not(:disabled):hover, .select option:not(:disabled):focus-visible, .select select option:not(:disabled):hover, .select select option:not(:disabled):focus-visible {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+    @media (forced-colors: active) {
+      .select option:not(:disabled):hover, .select option:not(:disabled):focus-visible, .select select option:not(:disabled):hover, .select select option:not(:disabled):focus-visible {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+    .select option:not(:disabled):active, .select select option:not(:disabled):active {
+      background-color: var(--color-neutral);
+      color: var(--color-neutral-content);
+      box-shadow: 0 2px calc(var(--depth) * 3px) -2px var(--color-neutral);
+    }
+  }
   @layer daisyui.l1.l2 {
     .menu-horizontal {
       display: inline-flex;
@@ -999,6 +1185,235 @@
   @media (hover: hover) {
     .join > :where(.btn:hover, :has(.btn:hover)) {
       isolation: isolate;
+    }
+  }
+  @layer daisyui.l1.l2.l3 {
+    .file-input {
+      cursor: pointer;
+      cursor: pointer;
+      border: var(--border) solid #0000;
+      display: inline-flex;
+      appearance: none;
+      align-items: center;
+      background-color: var(--color-base-100);
+      vertical-align: middle;
+      webkit-user-select: none;
+      user-select: none;
+      width: clamp(3rem, 20rem, 100%);
+      height: var(--size);
+      padding-inline-end: 0.75rem;
+      font-size: 0.875rem;
+      line-height: 2;
+      border-start-start-radius: var(--join-ss, var(--radius-field));
+      border-start-end-radius: var(--join-se, var(--radius-field));
+      border-end-start-radius: var(--join-es, var(--radius-field));
+      border-end-end-radius: var(--join-ee, var(--radius-field));
+      border-color: var(--input-color);
+      box-shadow: 0 1px var(--input-color) inset, 0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;
+      --size: calc(var(--size-field, 0.25rem) * 10);
+      --input-color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input {
+        box-shadow: 0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000) inset, 0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;
+      }
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input {
+        --input-color: color-mix(in oklab, var(--color-base-content) 20%, #0000);
+      }
+    }
+    .file-input::file-selector-button {
+      margin-inline-end: calc(0.25rem * 4);
+      cursor: pointer;
+      padding-inline: calc(0.25rem * 4);
+      webkit-user-select: none;
+      user-select: none;
+      height: calc(100% + var(--border) * 2);
+      margin-block: calc(var(--border) * -1);
+      margin-inline-start: calc(var(--border) * -1);
+      font-size: 0.875rem;
+      color: var(--btn-fg);
+      border-width: var(--border);
+      border-style: solid;
+      border-color: var(--btn-border);
+      border-start-start-radius: calc(var(--join-ss, var(--radius-field) - var(--border)));
+      border-end-start-radius: calc(var(--join-es, var(--radius-field) - var(--border)));
+      font-weight: 600;
+      background-color: var(--btn-bg);
+      background-size: calc(var(--noise) * 100%);
+      background-image: var(--btn-noise);
+      text-shadow: 0 0.5px oklch(1 0 0 / calc(var(--depth) * 0.15));
+      box-shadow: 0 0.5px 0 0.5px white inset, var(--btn-shadow);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input::file-selector-button {
+        box-shadow: 0 0.5px 0 0.5px color-mix( in oklab, color-mix(in oklab, white 30%, var(--btn-bg)) calc(var(--depth) * 20%), #0000 ) inset, var(--btn-shadow);
+      }
+    }
+    .file-input::file-selector-button {
+      --size: calc(var(--size-field, 0.25rem) * 10);
+      --btn-bg: var(--btn-color, var(--color-base-200));
+      --btn-fg: var(--color-base-content);
+      --btn-border: var(--btn-bg);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input::file-selector-button {
+        --btn-border: color-mix(in oklab, var(--btn-bg), #000 5%);
+      }
+    }
+    .file-input::file-selector-button {
+      --btn-shadow: 0 3px 2px -2px var(--btn-bg),
+        0 4px 3px -2px var(--btn-bg);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input::file-selector-button {
+        --btn-shadow: 0 3px 2px -2px color-mix(in oklab, var(--btn-bg) 30%, #0000),
+        0 4px 3px -2px color-mix(in oklab, var(--btn-bg) 30%, #0000);
+      }
+    }
+    .file-input::file-selector-button {
+      --btn-noise: var(--fx-noise);
+    }
+    .file-input:focus {
+      --input-color: var(--color-base-content);
+      box-shadow: 0 1px var(--input-color);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input:focus {
+        box-shadow: 0 1px color-mix(in oklab, var(--input-color) 10%, #0000);
+      }
+    }
+    .file-input:focus {
+      outline: 2px solid var(--input-color);
+      outline-offset: 2px;
+      isolation: isolate;
+    }
+    .file-input:has(> input[disabled]), .file-input:is(:disabled, [disabled]) {
+      cursor: not-allowed;
+      border-color: var(--color-base-200);
+      background-color: var(--color-base-200);
+    }
+    .file-input:has(> input[disabled])::placeholder, .file-input:is(:disabled, [disabled])::placeholder {
+      color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input:has(> input[disabled])::placeholder, .file-input:is(:disabled, [disabled])::placeholder {
+        color: color-mix(in oklab, var(--color-base-content) 20%, transparent);
+      }
+    }
+    .file-input:has(> input[disabled]), .file-input:is(:disabled, [disabled]) {
+      box-shadow: none;
+      color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input:has(> input[disabled]), .file-input:is(:disabled, [disabled]) {
+        color: color-mix(in oklch, var(--color-base-content) 20%, #0000);
+      }
+    }
+    .file-input:has(> input[disabled])::file-selector-button, .file-input:is(:disabled, [disabled])::file-selector-button {
+      cursor: not-allowed;
+      border-color: var(--color-base-200);
+      background-color: var(--color-base-200);
+      --btn-border: #0000;
+      --btn-noise: none;
+      --btn-fg: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .file-input:has(> input[disabled])::file-selector-button, .file-input:is(:disabled, [disabled])::file-selector-button {
+        --btn-fg: color-mix(in oklch, var(--color-base-content) 20%, #0000);
+      }
+    }
+  }
+  @layer daisyui.l1.l2.l3 {
+    .textarea {
+      border: var(--border) solid #0000;
+      min-height: calc(0.25rem * 20);
+      flex-shrink: 1;
+      appearance: none;
+      border-radius: var(--radius-field);
+      background-color: var(--color-base-100);
+      padding-block: calc(0.25rem * 2);
+      vertical-align: middle;
+      width: clamp(3rem, 20rem, 100%);
+      padding-inline-start: 0.75rem;
+      padding-inline-end: 0.75rem;
+      font-size: max(var(--font-size, 0.875rem), 0.875rem);
+      touch-action: manipulation;
+      border-color: var(--input-color);
+      box-shadow: 0 1px var(--input-color) inset, 0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;
+      --input-color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .textarea {
+        box-shadow: 0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000) inset, 0 -1px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;
+      }
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .textarea {
+        --input-color: color-mix(in oklab, var(--color-base-content) 20%, #0000);
+      }
+    }
+    .textarea textarea {
+      appearance: none;
+      background-color: transparent;
+      border: none;
+    }
+    .textarea textarea:focus, .textarea textarea:focus-within {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+    @media (forced-colors: active) {
+      .textarea textarea:focus, .textarea textarea:focus-within {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+    .textarea:focus, .textarea:focus-within {
+      --input-color: var(--color-base-content);
+      box-shadow: 0 1px var(--input-color);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .textarea:focus, .textarea:focus-within {
+        box-shadow: 0 1px color-mix(in oklab, var(--input-color) calc(var(--depth) * 10%), #0000);
+      }
+    }
+    .textarea:focus, .textarea:focus-within {
+      outline: 2px solid var(--input-color);
+      outline-offset: 2px;
+      isolation: isolate;
+    }
+    @media (pointer: coarse) {
+      @supports (-webkit-touch-callout: none) {
+        .textarea:focus, .textarea:focus-within {
+          --font-size: 1rem;
+        }
+      }
+    }
+    .textarea:has(> textarea[disabled]), .textarea:is(:disabled, [disabled]) {
+      cursor: not-allowed;
+      border-color: var(--color-base-200);
+      background-color: var(--color-base-200);
+      color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .textarea:has(> textarea[disabled]), .textarea:is(:disabled, [disabled]) {
+        color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+      }
+    }
+    .textarea:has(> textarea[disabled])::placeholder, .textarea:is(:disabled, [disabled])::placeholder {
+      color: var(--color-base-content);
+    }
+    @supports (color: color-mix(in lab, red, red)) {
+      .textarea:has(> textarea[disabled])::placeholder, .textarea:is(:disabled, [disabled])::placeholder {
+        color: color-mix(in oklab, var(--color-base-content) 20%, transparent);
+      }
+    }
+    .textarea:has(> textarea[disabled]), .textarea:is(:disabled, [disabled]) {
+      box-shadow: none;
+    }
+    .textarea:has(> textarea[disabled]) > textarea[disabled] {
+      cursor: not-allowed;
     }
   }
   @layer daisyui.l1.l2 {
@@ -1241,6 +1656,9 @@
   .w-full {
     width: 100%;
   }
+  .max-w-2xl {
+    max-width: var(--container-2xl);
+  }
   .max-w-6xl {
     max-width: var(--container-6xl);
   }
@@ -1381,33 +1799,11 @@
       color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
     }
   }
-  .text-info {
-    color: var(--color-info);
-  }
   .text-info-content {
     color: var(--color-info-content);
   }
-  .text-info\/79 {
-    color: var(--color-info);
-  }
-  @supports (color: color-mix(in lab, red, red)) {
-    .text-info\/79 {
-      color: color-mix(in oklab, var(--color-info) 79%, transparent);
-    }
-  }
-  .text-primary {
-    color: var(--color-primary);
-  }
   .text-primary-content {
     color: var(--color-primary-content);
-  }
-  .text-primary\/80 {
-    color: var(--color-primary);
-  }
-  @supports (color: color-mix(in lab, red, red)) {
-    .text-primary\/80 {
-      color: color-mix(in oklab, var(--color-primary) 80%, transparent);
-    }
   }
   .opacity-50 {
     opacity: 50%;
