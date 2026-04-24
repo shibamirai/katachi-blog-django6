@@ -47,7 +47,7 @@ class PostListView(generic.ListView):
 
 class PostDetailView(generic.DetailView):
     template_name = 'blog/posts/detail.html'
-    queryset = Post.objects.select_related('category').select_related('author')
+    queryset = Post.objects.select_related('category').select_related('author').prefetch_related('comment_set__author')
 
 
 class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.CreateView):

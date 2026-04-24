@@ -1,0 +1,10 @@
+<article class="chat {% if comment.author_id is user.id %}chat-end{% else %}chat-start{% endif %}">
+    <header class="chat-header">
+        {{ comment.author.name }}
+        <time class="text-xs opacity-50">{{ comment.posted_at }}</time>
+    </header>
+
+    <p class="chat-bubble">
+        {{ comment.body|linebreaksbr }}
+    </p>
+</article>

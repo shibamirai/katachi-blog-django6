@@ -1,6 +1,6 @@
 import factory
 from customauth.models import CustomUser
-from .models import Post, Category
+from .models import Post, Category, Comment
 
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -22,4 +22,13 @@ class PostFactory(factory.django.DjangoModelFactory):
     body = factory.Faker('paragraph', locale='ja')
     author = factory.Faker('random_element', elements=list(CustomUser.objects.filter(is_admin=1)))
     category = factory.Faker('random_element', elements=list(Category.objects.all()))
+
+
+class CommentFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Comment
+
+    post_id = factory.Faker('random_element', elements=list(Post.objects.all()))
+    author = factory.Faker('random_element', elements=list(CustomUser.objects.all()))
+    body = factory.Faker('paragraph', locale='ja')
     

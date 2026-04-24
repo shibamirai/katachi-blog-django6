@@ -44,6 +44,15 @@
             <p class="leading-loose mt-8">
                 {{ post.body|linebreaksbr }}
             </p>
+
+            <section class="mt-10 bg-base-100 border border-base-300 rounded-sm p-4 space-y-4">
+                <h2 class="font-bold text-lg">コメント</h2>
+                {% for comment in post.comment_set.all %}
+                    <c-blog.posts.comment :comment=comment />
+                {% empty %}
+                    <p>コメントはありません。</p>
+                {% endfor %}
+            </section>
         </div>
     </article>
 </c-layouts.base>
