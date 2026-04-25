@@ -48,11 +48,11 @@
             <section class="mt-10 bg-base-100 border border-base-300 rounded-sm p-4 space-y-4">
                 <h2 class="font-bold text-lg">コメント</h2>
                 {% for comment in post.comment_set.all %}
-                    <c-blog.posts.comment :comment=comment />
+                    <c-blog.comment :comment=comment />
                 {% empty %}
                     <p>コメントはありません。</p>
                 {% endfor %}
-                <c-blog.posts.comment-form />
+                <c-blog.comment.create />
             </section>
         </div>
     </article>
