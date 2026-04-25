@@ -11,11 +11,17 @@
     </p>
 
     {% if user.id is comment.author_id %}
-        <footer class="chat-footer">
+        <footer class="chat-footer flex">
             <button type="button"
                     class="link link-primary"
                     hx-get="{% url 'comment-update' comment.id %}"
             >編集</button>
+            <form method="POST" action="{% url 'comment-delete' comment.id %}">
+                {% csrf_token %}
+                <button class="link link-secondary">
+                    削除
+                </button>
+            </form>
         </footer>
     {% endif %}
 </article>
