@@ -7,8 +7,8 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic, View
 
-from .forms import CommentCreateForm, PostForm
-from .models import Category, Post
+from .forms import CommentForm, PostForm
+from .models import Category, Comment, Post
 
 
 class PostListView(generic.ListView):
@@ -65,7 +65,7 @@ class PostDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = CommentCreateForm()
+        context['form'] = CommentForm()
         return context
 
 
@@ -75,7 +75,7 @@ class CommentCreateFormView(generic.detail.SingleObjectMixin, generic.FormView):
     URL から特定した Post に対してコメントを付与するため、SingleObjectMixin で model に Post を指定する
     """
     template_name = 'blog/posts/detail.html'    # バリデーションエラー時に編集画面に戻すために必要
-    form_class = CommentCreateForm
+    form_class = CommentForm
     model = Post
 
     def post(self, request, *args, **kwargs):
@@ -164,3 +164,22 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
             cleaned_data,
             title=self.object.title,
         )
+
+
+class CommentDetailView(generic.DetailView):
+    template_name = 'cotton/blog/comment/index.html'
+    model = Comment
+
+
+class CommentUpdateView(UserPassesTestMixin, generic.UpdateView):
+    template_name = 'cotton/blog/comment/update.html'
+    model = Comment
+    form_class = CommentForm
+
+    def test_func(self):
+        # 投稿者本人しかアクセスできないようにする
+        comment = self.get_object()
+        return comment.author == self.request.user
+
+    def get_success_url(self):
+        return reverse('comment', kwargs={'pk': self.get_object().id})

@@ -1543,6 +1543,14 @@
     grid-column: span 7 / span 7;
   }
   @layer daisyui.l1.l2.l3 {
+    .chat-footer {
+      grid-row-start: 3;
+      display: flex;
+      gap: calc(0.25rem * 1);
+      font-size: 0.6875rem;
+    }
+  }
+  @layer daisyui.l1.l2.l3 {
     .chat-header {
       grid-row-start: 1;
       display: flex;
@@ -1847,6 +1855,26 @@
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
+  @layer daisyui.l1.l2.l3 {
+    .link {
+      cursor: pointer;
+      text-decoration-line: underline;
+    }
+    .link:focus {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+    @media (forced-colors: active) {
+      .link:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+      }
+    }
+    .link:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
   .items-center {
     align-items: center;
   }
@@ -1975,6 +2003,36 @@
       --alert-color: var(--color-info);
     }
   }
+  @layer daisyui.l1.l2 {
+    .link-primary {
+      color: var(--color-primary);
+    }
+    @media (hover: hover) {
+      .link-primary:hover {
+        color: var(--color-primary);
+      }
+      @supports (color: color-mix(in lab, red, red)) {
+        .link-primary:hover {
+          color: color-mix(in oklab, var(--color-primary) 80%, #000);
+        }
+      }
+    }
+  }
+  @layer daisyui.l1.l2 {
+    .link-secondary {
+      color: var(--color-secondary);
+    }
+    @media (hover: hover) {
+      .link-secondary:hover {
+        color: var(--color-secondary);
+      }
+      @supports (color: color-mix(in lab, red, red)) {
+        .link-secondary:hover {
+          color: color-mix(in oklab, var(--color-secondary) 80%, #000);
+        }
+      }
+    }
+  }
   .text-base-content {
     color: var(--color-base-content);
   }
@@ -2012,6 +2070,24 @@
     --tw-duration: 300ms;
     transition-duration: 300ms;
   }
+  @layer daisyui.l1 {
+    .btn-outline:not( .btn-active, :hover, :active:focus, :focus-visible, input:checked:not(.filter .btn), :disabled, [disabled], .btn-disabled ) {
+      --btn-shadow: "";
+      --btn-bg: #0000;
+      --btn-fg: var(--btn-color);
+      --btn-border: var(--btn-color);
+      --btn-noise: none;
+    }
+    @media (hover: none) {
+      .btn-outline:not(.btn-active, :active, :focus-visible, input:checked:not(.filter .btn)):hover {
+        --btn-shadow: "";
+        --btn-bg: #0000;
+        --btn-fg: var(--btn-color);
+        --btn-border: var(--btn-color);
+        --btn-noise: none;
+      }
+    }
+  }
   @layer daisyui.l1.l2 {
     .btn-sm {
       --fontsize: 0.75rem;
@@ -2020,9 +2096,22 @@
     }
   }
   @layer daisyui.l1.l2 {
+    .btn-xs {
+      --fontsize: 0.6875rem;
+      --btn-p: 0.5rem;
+      --size: calc(var(--size-field, 0.25rem) * 6);
+    }
+  }
+  @layer daisyui.l1.l2 {
     .badge-info {
       --badge-color: var(--color-info);
       --badge-fg: var(--color-info-content);
+    }
+  }
+  @layer daisyui.l1.l2.l3 {
+    .btn-info {
+      --btn-color: var(--color-info);
+      --btn-fg: var(--color-info-content);
     }
   }
   @layer daisyui.l1.l2.l3 {

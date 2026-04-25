@@ -9,7 +9,7 @@
                 {% for post in post_list %}
                     <li class="list-row">
                         <div>
-                            {{ post.posted_at|date:'Y/m/d' }}
+                            {{ post.modified_at|date:'Y/m/d' }}
                         </div>
                         <div>
                             <a href="{% url 'detail' post.slug %}" class="block">

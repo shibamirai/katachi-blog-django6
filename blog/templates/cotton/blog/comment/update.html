@@ -1,0 +1,15 @@
+<article hx-target="this" hx-swap="outerHTML">
+    <form hx-post="{% url 'comment-update' form.instance.id %}">
+        {% csrf_token %}
+        {{ form }}
+        <div class="text-right text-xs">
+            <button type="submit"
+                    class="link link-primary"
+            >更新</button>
+            <button type="button"
+                    class="link link-secondary"
+                    hx-get="{% url 'comment' form.instance.id %}"
+            >キャンセル</button>
+        </div>
+    </form>
+</article>

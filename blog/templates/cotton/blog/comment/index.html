@@ -1,10 +1,21 @@
-<article class="chat {% if comment.author_id is user.id %}chat-end{% else %}chat-start{% endif %}">
+<article hx-target="this" hx-swap="outerHTML"
+    class="chat {% if user.id is comment.author_id %}chat-end{% else %}chat-start{% endif %}"
+>
     <header class="chat-header">
         {{ comment.author.name }}
-        <time class="text-xs opacity-50">{{ comment.posted_at }}</time>
+        <time class="text-xs opacity-50">{{ comment.modified_at }}</time>
     </header>
 
     <p class="chat-bubble">
         {{ comment.body|linebreaksbr }}
     </p>
+
+    {% if user.id is comment.author_id %}
+        <footer class="chat-footer">
+            <button type="button"
+                    class="link link-primary"
+                    hx-get="{% url 'comment-update' comment.id %}"
+            >編集</button>
+        </footer>
+    {% endif %}
 </article>
