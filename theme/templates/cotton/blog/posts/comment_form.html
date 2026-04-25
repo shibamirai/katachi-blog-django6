@@ -1,0 +1,15 @@
+{% if user.is_authenticated %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <div class="text-right mt-2">
+            <button class="btn btn-sm btn-primary w-25">送信</button>
+        </div>
+    </form>
+{% else %}
+    <p class="text-xs font-semibold">
+        コメントを残すには
+        <a href="{% url 'customauth:register' %}" class="hover:underline">アカウント登録</a> か
+        <a href="{% url 'customauth:login' %}" class="hover:underline">ログイン</a> をしてください。
+    </p>
+{% endif %}
