@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_cotton',
     'blog',
     'django_alpine',
+    'django_htmx',
 ]
 
 if DEBUG:
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 if DEBUG:

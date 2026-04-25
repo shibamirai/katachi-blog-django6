@@ -1,3 +1,4 @@
+{% load django_htmx %}
 {% load static tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
@@ -8,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="{% static 'js/alpine.js' %}" defer></script>
+    {% htmx_script %}
     {% tailwind_css %}
     <style>
         .errorlist {
