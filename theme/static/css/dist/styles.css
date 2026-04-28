@@ -1808,8 +1808,14 @@
   .h-\[1em\] {
     height: 1em;
   }
-  .min-h-\[calc\(100dvh-250px\)\] {
-    min-height: calc(100dvh - 250px);
+  .h-full {
+    height: 100%;
+  }
+  .min-h-\[calc\(100dvh-210px\)\] {
+    min-height: calc(100dvh - 210px);
+  }
+  .min-h-full {
+    min-height: 100%;
   }
   @layer daisyui.l1.l2 {
     .btn-block {
@@ -1874,6 +1880,9 @@
       outline: 2px solid currentColor;
       outline-offset: 2px;
     }
+  }
+  .content-center {
+    align-content: center;
   }
   .items-center {
     align-items: center;
@@ -1946,6 +1955,9 @@
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
+  }
+  .py-10 {
+    padding-block: calc(var(--spacing) * 10);
   }
   .py-15 {
     padding-block: calc(var(--spacing) * 15);
@@ -2070,36 +2082,11 @@
     --tw-duration: 300ms;
     transition-duration: 300ms;
   }
-  @layer daisyui.l1 {
-    .btn-outline:not( .btn-active, :hover, :active:focus, :focus-visible, input:checked:not(.filter .btn), :disabled, [disabled], .btn-disabled ) {
-      --btn-shadow: "";
-      --btn-bg: #0000;
-      --btn-fg: var(--btn-color);
-      --btn-border: var(--btn-color);
-      --btn-noise: none;
-    }
-    @media (hover: none) {
-      .btn-outline:not(.btn-active, :active, :focus-visible, input:checked:not(.filter .btn)):hover {
-        --btn-shadow: "";
-        --btn-bg: #0000;
-        --btn-fg: var(--btn-color);
-        --btn-border: var(--btn-color);
-        --btn-noise: none;
-      }
-    }
-  }
   @layer daisyui.l1.l2 {
     .btn-sm {
       --fontsize: 0.75rem;
       --btn-p: 0.75rem;
       --size: calc(var(--size-field, 0.25rem) * 8);
-    }
-  }
-  @layer daisyui.l1.l2 {
-    .btn-xs {
-      --fontsize: 0.6875rem;
-      --btn-p: 0.5rem;
-      --size: calc(var(--size-field, 0.25rem) * 6);
     }
   }
   @layer daisyui.l1.l2 {
@@ -2109,16 +2096,13 @@
     }
   }
   @layer daisyui.l1.l2.l3 {
-    .btn-info {
-      --btn-color: var(--color-info);
-      --btn-fg: var(--color-info-content);
-    }
-  }
-  @layer daisyui.l1.l2.l3 {
     .btn-primary {
       --btn-color: var(--color-primary);
       --btn-fg: var(--color-primary-content);
     }
+  }
+  .block-full {
+    block-size: 100%;
   }
   @layer daisyui.l1.l2 {
     .input-info, .input-info:focus, .input-info:focus-within {

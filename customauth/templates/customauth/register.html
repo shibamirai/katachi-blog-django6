@@ -1,13 +1,14 @@
 <c-layouts.base>
-    <section class="max-w-lg mx-auto my-10 bg-base-100 border border-base-300 p-6 rounded-xl">
-        <h1 class="text-center font-bold text-xl">
-            アカウント登録
-        </h1>
-
-        <form method="POST" class="mt-6 grid gap-y-6">
-            {% csrf_token %}
-            {{ form }}
-            <button class="btn btn-block btn-primary">登録</button>
-        </form>
-    </section>
+    <div class="py-10">
+        <section class="max-w-lg mx-auto bg-base-100 border border-base-300 p-6 rounded-xl">
+            <h1 class="text-center font-bold text-xl">
+                アカウント登録
+            </h1>
+            <form method="POST" class="mt-6 grid gap-y-6">
+                {% csrf_token %}
+                {{ form }}
+                <button class="btn btn-block btn-primary">登録</button>
+            </form>
+        </section>
+    </div>
 </c-layouts.base>
